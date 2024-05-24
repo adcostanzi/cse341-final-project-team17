@@ -35,6 +35,44 @@ const getReviewById = async (req, res) => {
   }
 };
 
+/* const getReviewsByGameId = async (req, res) => {
+  // #swagger.tags=["Reviews"]
+  const gameId = req.params.id;
+  try {
+    const reviews = await model.reviewModel.find({ GameId: gameId });
+
+    if (!reviews) {
+      return res
+        .status(404)
+        .send("The specified game does not have any reviews");
+    }
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.log("Error while trying to fetch review", error);
+    res.status(500).send("Server Error");
+  }
+}; */
+
+const getReviewsByUserId = async (req, res) => {
+  // #swagger.tags=["Reviews"]
+  const userId = req.params.id;
+  try {
+    const reviews = await model.reviewModel.find({ UserId: userId });
+
+    if (!reviews) {
+      return res
+        .status(404)
+        .send("The specified user does not have any reviews");
+    }
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.log("Error while trying to fetch review", error);
+    res.status(500).send("Server Error");
+  }
+};
+
 const createReview = async (req, res) => {
   // #swagger.tags=["Reviews"]
   const reviewToAdd = {
@@ -119,4 +157,6 @@ module.exports = {
   createReview,
   deleteReview,
   updateReview,
+  //getReviewsByGameId,
+  getReviewsByUserId,
 };
