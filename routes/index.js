@@ -6,13 +6,18 @@ router.get("/", (req, res) => {
   res.send("Welcome to Final Project Team 17");
 });
 
-router.get('/find-all', (req, res) => {
-  models.reviewModel.find({}).then(function(games) {
-    res.json(games)
-  }).catch(function(error) {
-    console.log(error)
-  })
-})
+router.get("/find-all", (req, res) => {
+  models.reviewModel
+    .find({})
+    .then(function (games) {
+      res.json(games);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
+router.use("/review", require("./reviews"));
 
 // router.get('/game/find-all', gamesController.findAll);
 
